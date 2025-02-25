@@ -8,6 +8,25 @@ def minimize_dfa(n, alphabet, finals, transitions):
             if ((i in finals and j not in finals) or (i not in finals and j in finals)):
                 mark[i][j] = True
 
+   changed = True
+    while changed:
+        changed = False
+        for i in range(n):
+            for j in range(i+1, n):
+                if not mark[i][j]:
+                    # Para cada símbolo del alfabeto se revisa el par de estados destino.
+                    for sym_index in range(len(alphabet)+1):
+                        next_i = transitions[i][sym_index]
+                        next_j = transitions[j][sym_index]
+                        # Aseguramos que el par se considere en orden (menor, mayor)
+                        if next_i > next_j:
+                            next_i, next_j = next_j, next_i
+                        # Si los estados destino ya son distinguibles, se marca el par actual.
+                        if next_i != next_j and mark[next_i][next_j]:
+                            mark[i][j] = True
+                            changed = True
+                            break
+
 def main():
     if int(input("Ingrese el formato de la entrada (1 para archivo, 2 para consola): ")) == 1:
         input_file = "predeterminated_input.txt" # Se lee la entrada desde el archivo "predeterminated_input.txt"
