@@ -1,3 +1,13 @@
+def minimize_dfa(n, alphabet, finals, transitions):
+    # Se crea una tabla (matriz) para almacenar si el par (i, j) (con i < j)
+    # ha sido marcado como distinguible.
+    mark = [[False for _ in range(n)] for _ in range(n)]
+    # Paso 1: Marcar como distinguibles a aquellos pares en los que uno es final y el otro no.
+    for i in range(n):
+        for j in range(i+1, n):
+            if ((i in finals and j not in finals) or (i not in finals and j in finals)):
+                mark[i][j] = True
+
 def main():
     if int(input("Ingrese el formato de la entrada (1 para archivo, 2 para consola): ")) == 1:
         input_file = "predeterminated_input.txt" # Se lee la entrada desde el archivo "predeterminated_input.txt"
