@@ -8,7 +8,7 @@ def minimize_dfa(n, alphabet, finals, transitions):
             if ((i in finals and j not in finals) or (i not in finals and j in finals)):
                 mark[i][j] = True
 
-   changed = True
+    changed = True
     while changed:
         changed = False
         for i in range(n):
@@ -26,6 +26,14 @@ def minimize_dfa(n, alphabet, finals, transitions):
                             mark[i][j] = True
                             changed = True
                             break
+
+    equivalent_pairs = []
+        for i in range(n):
+            for j in range(i+1, n):
+                if not mark[i][j]:
+                    equivalent_pairs.append((i, j))
+        equivalent_pairs.sort()
+        return equivalent_pairs
 
 def main():
     if int(input("Ingrese el formato de la entrada (1 para archivo, 2 para consola): ")) == 1:
@@ -77,6 +85,6 @@ def main():
            eq_pairs = minimize_dfa(n, alphabet, finals, transitions)
            output = " ".join(f"({i},{j})" for (i, j) in eq_pairs)
            print(output)
-
+            
 if _name_ == "_main_":
     main()
