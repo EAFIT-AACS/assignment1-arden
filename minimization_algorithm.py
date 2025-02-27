@@ -61,7 +61,20 @@ def main():
             for _ in range(n):
                 row = list(map(int, lines[index].split()))
                 index += 1
-                transitions.append(row)
+                for _ in range(len(row)):
+                    while True:
+                        if row[_] >= n:
+                           print("Error: el estado destino no es válido. Inténtelo de nuevo.")
+                        else:
+                            transitions.append(row)
+                            break
+            # Se calcula la minimización y se obtienen los pares equivalentes.
+            eq_pairs = minimize_dfa(n, alphabet, finals, transitions)
+            if len(eq_pairs) == 0:
+               print("No hay estados equivalentes dentro del automata")
+            # Se formatea la salida: cada par se muestra como "i,j"
+            output = " ".join(f"({i},{j})" for (i, j) in eq_pairs)
+            print(output) 
             
     else:
         cases = int(input("Ingrese el número de casos: "))
@@ -72,20 +85,25 @@ def main():
            transitions = []
            for i in range(n):
                while True:
-                row = list(map(int, input(f"Transición {i} (Empiece con {i}): ").split()))
+                row = list(map(int, input(f"Transición {i} (Empiece con {i}): ").split()))
                 if len(row) != len(alphabet) + 1:
-                    print("Error: la fila de transición excede el número de posibles transiciones de acuerdo al alfabeto. Inténtelo de nuevo.")
+                    print("Error: la fila de transición excede el número de posibles transiciones de acuerdo al alfabeto. Inténtelo de nuevo.")
                 else:
-                    transitions.append(row)
-                    break
-                    
-    # Se calcula la minimización y se obtienen los pares equivalentes.
-    eq_pairs = minimize_dfa(n, alphabet, finals, transitions)
-    if len(eq_pairs) == 0:
-        print("No hay estados equivalentes dentro del automata")
-    # Se formatea la salida: cada par se muestra como "i,j"
-    output = " ".join(f"({i},{j})" for (i, j) in eq_pairs)
-    print(output)       
+                    continue
+                for _ in range(len(row)):
+                    if row[_] >= n:
+                        print("Error: el estado destino no es válido. Inténtelo de nuevo.")
+                        break
+                    else:
+                        transitions.append(row)
+                        break
+          # Se calcula la minimización y se obtienen los pares equivalentes.
+          eq_pairs = minimize_dfa(n, alphabet, finals, transitions)
+          if len(eq_pairs) == 0:
+             print("No hay estados equivalentes dentro del automata")
+          # Se formatea la salida: cada par se muestra como "i,j"
+          output = " ".join(f"({i},{j})" for (i, j) in eq_pairs)
+          print(output)       
             
 if _name_ == "_main_":
     main()
