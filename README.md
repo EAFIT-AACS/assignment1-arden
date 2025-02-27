@@ -66,8 +66,10 @@ The main function of the program handles input and output, allowing the DFA spec
      - Alphabet.
      - Final states.
      - Transition matrix.
-- The `minimize_dfa` function is called and the equivalent state pairs are printed.
-
+- The `minimize_dfa` function is called with the data of the input file.
+- It is verified that there are equivalent pairs in each automaton, if not, we print a message that there are no equivalent pairs in that automaton.
+- In the event that there are equivalent pairs, these are printed in lexicographic order.
+  
 #### **Console Input**
 If the user chooses to enter the data manually:
 - The information is requested in the same format as the file.
@@ -75,7 +77,7 @@ If the user chooses to enter the data manually:
   > "Error: la fila de transición excede el número de posibles transiciones de acuerdo al alfabeto. Inténtelo de nuevo."
   
   and the input is requested again.
-- The `minimize_dfa` function is called and the result is printed.
+- The same thing is done as in the file input when calling the function `minimize_dfa`.
 
   
 ---
