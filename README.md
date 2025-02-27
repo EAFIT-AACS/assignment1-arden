@@ -53,33 +53,51 @@ Conversely, two states `p` and `q` are **distinguishable** if:
 If `p` and `q` are distinguishable, it means there is at least one input string that produces a behavioral difference, preventing them from being merged in the minimized DFA.
 
 ---
-
 ### 2. **Function `main`**
-The main function of the program handles input and output, allowing the DFA specification to be read either from a file or from the console.
+The `main` function handles input and output, allowing the DFA specification to be read either from a file or from the console. It has been updated to include additional error handling for invalid destination states in the transition matrix.
+
+#### **Input Format Selection**
+- The user is prompted to choose the input format:
+  - Option `1`: Read the DFA from the file `dfa_input.txt`.
+  - Option `2`: Enter the DFA data manually via the console.
 
 #### **File Input**
-- The file `dfa_input.txt` is read.
-- Blank lines are removed and the data is processed:
-  1. Number of test cases.
+- The file `dfa_input.txt` is opened and read.
+- Blank lines are removed, and the data is processed as follows:
+  1. The number of test cases is read.
   2. For each test case:
-     - Number of states.
-     - Alphabet.
-     - Final states.
-     - Transition matrix.
-- The `minimize_dfa` function is called with the data of the input file.
-- It is verified that there are equivalent pairs in each automaton, if not, we print a message that there are no equivalent pairs in that automaton.
-- In the event that there are equivalent pairs, these are printed in lexicographic order.
-  
-#### **Console Input**
-If the user chooses to enter the data manually:
-- The information is requested in the same format as the file.
-- **New Error Handling:** When entering the transition matrix, the program repeatedly requests the transition row for each state. If the entered row does not contain the correct number of elements (which should equal the length of the alphabet plus one), an error message is displayed:
-  > "Error: la fila de transición excede el número de posibles transiciones de acuerdo al alfabeto. Inténtelo de nuevo."
-  
-  and the input is requested again.
-- The same thing is done as in the file input when calling the function `minimize_dfa`.
+     - **Number of states:** The number `n` is read.
+     - **Alphabet:** A list of symbols is extracted.
+     - **Final states:** A list of final states is read and converted to integers.
+     - **Transition Matrix:** For each of the `n` states, a transition row is read.
+       - **Error Handling for Transitions:** For each element in the transition row, the program checks if the destination state is valid (i.e., it must be less than `n`). If an invalid destination state is detected, an error message is displayed:
+         > "Error: el estado destino no es válido. Inténtelo de nuevo."
+         
+         The input is then requested again until a valid row is provided.
+- Once the input is processed, the `minimize_dfa` function is called with the extracted data.
+- After minimization:
+  - If no equivalent state pairs are found, a message is printed indicating that there are no equivalent states in the automaton.
+  - Otherwise, the equivalent state pairs are printed in lexicographic order.
 
-  
+#### **Console Input**
+If the user opts for manual entry:
+- The number of test cases is requested.
+- For each test case:
+  - **Number of states:** The number `n` is entered.
+  - **Alphabet:** The alphabet is entered as a space-separated list.
+  - **Final states:** Final states are entered and converted to integers.
+  - **Transition Matrix:** For each state, the program prompts for the transition row with a message like:
+    > "Transición _i_ (Empiece con _i_):"
+    - **Error Handling for Transition Rows:**
+      - The program first checks if the entered row has the correct number of elements (which should be `len(alphabet) + 1`). If not, it displays an error message:
+        > "Error: la fila de transición excede el número de posibles transiciones de acuerdo al alfabeto. Inténtelo de nuevo."
+      - Then, for each element in the row, it checks whether the destination state is valid (i.e., less than `n`). If an invalid destination state is found, an error message is shown:
+        > "Error: el estado destino no es válido. Inténtelo de nuevo."
+        
+        The input is requested repeatedly until a valid row is provided.
+- After gathering all data, the `minimize_dfa` function is invoked.
+- Similar to file input, if there are no equivalent state pairs, a message is printed. Otherwise, the equivalent pairs are formatted and printed in lexicographic order.
+
 ---
 ## Steps to Execute the Algorithm
 
