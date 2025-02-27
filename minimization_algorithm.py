@@ -62,11 +62,7 @@ def main():
                 row = list(map(int, lines[index].split()))
                 index += 1
                 transitions.append(row)
-            # Se calcula la minimización y se obtienen los pares equivalentes.
-            eq_pairs = minimize_dfa(n, alphabet, finals, transitions)
-            # Se formatea la salida: cada par se muestra como "i,j"
-            output = " ".join(f"({i},{j})" for (i, j) in eq_pairs)
-            print(output)
+            
     else:
         cases = int(input("Ingrese el número de casos: "))
         for _ in range(cases):
@@ -82,9 +78,14 @@ def main():
                 else:
                     transitions.append(row)
                     break
-           eq_pairs = minimize_dfa(n, alphabet, finals, transitions)
-           output = " ".join(f"({i},{j})" for (i, j) in eq_pairs)
-           print(output)
+                    
+    # Se calcula la minimización y se obtienen los pares equivalentes.
+    eq_pairs = minimize_dfa(n, alphabet, finals, transitions)
+    if len(eq_pairs) == 0:
+        print("No hay estados equivalentes dentro del automata")
+    # Se formatea la salida: cada par se muestra como "i,j"
+    output = " ".join(f"({i},{j})" for (i, j) in eq_pairs)
+    print(output)       
             
 if _name_ == "_main_":
     main()
