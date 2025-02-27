@@ -77,6 +77,19 @@ If the user chooses to enter the data manually:
   and the input is requested again.
 - The `minimize_dfa` function is called and the result is printed.
 
+  
+---
+## Steps to Execute the Algorithm
+
+1. **Ensure that Python 3 is installed.**
+2. **Prepare the necessary files:**
+   - `main.py` (source code of the algorithm).
+   - `dfa_input.txt` (input file with the DFA specification, if the file option is chosen).
+3. **Open a terminal in the directory where the code is located.**
+4. **Run the script with the following command:**
+   ```sh
+   python main.py
+   
 #### **Choosing the Input Format**
 5. **Choose the input format:**
    - Option `1`: Read the DFA from `dfa_input.txt`.
@@ -87,17 +100,17 @@ If the user chooses to enter the data manually:
 
 ## Example Input and Output
 ### **Input (file or console):**
-1
-4
-0 1
-2 3
-0 1
-1 2
-2 3
-3 0
+1 <br>
+4 <br>
+a <br>
+2 3 <br>
+0 2 <br>
+1 3 <br>
+2 1 <br>
+3 0 <br>
 
 ### **Expected Output:**
-(0,2) (1,3)
+(0,1) (2,3)
 
 ---
 
