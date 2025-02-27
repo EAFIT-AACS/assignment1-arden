@@ -91,12 +91,12 @@ def main():
                 else:
                     continue
                 for _ in range(len(row)):
-                    if row[_] >= n:
-                        print("Error: el estado destino no es válido. Inténtelo de nuevo.")
-                        break
-                    else:
-                        transitions.append(row)
-                        break
+                    while True:
+                       if row[_] >= n:
+                           print("Error: el estado destino no es válido. Inténtelo de nuevo.")
+                       else:
+                           transitions.append(row)
+                           break
           # Se calcula la minimización y se obtienen los pares equivalentes.
           eq_pairs = minimize_dfa(n, alphabet, finals, transitions)
           if len(eq_pairs) == 0:
