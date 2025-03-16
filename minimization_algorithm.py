@@ -28,12 +28,12 @@ def minimize_dfa(n, alphabet, finals, transitions):
                             break
 
     equivalent_pairs = []
-        for i in range(n):
-            for j in range(i+1, n):
-                if not mark[i][j]:
-                    equivalent_pairs.append((i, j))
-        equivalent_pairs.sort()
-        return equivalent_pairs
+    for i in range(n):
+        for j in range(i+1, n):
+            if not mark[i][j]:
+                equivalent_pairs.append((i, j))
+    equivalent_pairs.sort()
+    return equivalent_pairs
 
 def main():
     if int(input("Ingrese el formato de la entrada (1 para archivo, 2 para consola): ")) == 1:
@@ -98,12 +98,12 @@ def main():
                            transitions.append(row)
                            break
           # Se calcula la minimización y se obtienen los pares equivalentes.
-          eq_pairs = minimize_dfa(n, alphabet, finals, transitions)
-          if len(eq_pairs) == 0:
-             print("No hay estados equivalentes dentro del automata")
+        eq_pairs = minimize_dfa(n, alphabet, finals, transitions)
+        if len(eq_pairs) == 0:
+            print("No hay estados equivalentes dentro del automata")
           # Se formatea la salida: cada par se muestra como "i,j"
-          output = " ".join(f"({i},{j})" for (i, j) in eq_pairs)
-          print(output)       
+        output = " ".join(f"({i},{j})" for (i, j) in eq_pairs)
+        print(output)       
             
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
